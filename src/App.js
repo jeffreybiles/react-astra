@@ -1,4 +1,5 @@
 import './App.css';
+import { useState } from 'react'
 
 function App() {
   let foods = [
@@ -28,7 +29,7 @@ function App() {
       img: "/food/eggs.png"
     }
   ]
-  let orders = [
+  const [orders, setOrders] = useState([
     {
       id: 1,
       food: {
@@ -37,7 +38,17 @@ function App() {
         img: "/food/eggs.png"
       }
     }
-  ]
+  ])
+
+  const addOrder = (food) => {
+    let newOrder = {
+      id: Math.random(),
+      food,
+      state: 'ordered'
+    }
+    setOrders([newOrder].concat(orders)) 
+  }
+
   return (
     <div className="App container">
       <div>
@@ -47,7 +58,8 @@ function App() {
             <div key={food.id} className="flex flex-col space-y-2">
               <span className="text-lg font-semibold">{food.name}</span>
               <img className="w-32 h-32" src={food.img} />
-              <button className="border rounded-sm p-1 bg-gray-300">
+              <button className="border rounded-sm p-1 bg-gray-300"
+                      onClick={() => addOrder(food)}>
                 Order
               </button>
             </div>
