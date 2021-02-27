@@ -29,12 +29,21 @@ function App() {
     }
   ]
   return (
-    <div className="App">
-      <header className="bg-red-500">
-        {foods.map(food => (
-          <div key={food.id}>{food.name}</div>
-        ))}
-      </header>
+    <div className="App container">
+      <div>
+        <h1 className="title">Menu</h1>
+        <div className="flex flex-wrap space-x-4">
+          {foods.map(food => (
+            <div key={food.id} className="flex flex-col space-y-2">
+              <span className="text-lg font-semibold">{food.name}</span>
+              <img className="w-32 h-32" src={food.img} />
+              <button className="border rounded-sm p-1 bg-gray-300">
+                Order
+              </button>
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
   );
 }
