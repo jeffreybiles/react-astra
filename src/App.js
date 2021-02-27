@@ -2,21 +2,39 @@ import logo from './logo.svg';
 import './App.css';
 
 function App() {
+  let foods = [
+    {
+      id: 1,
+      name: "Pancakes",
+      img: "/food/pancakes.png"
+    },
+    {
+      id: 2,
+      name: "Sausage",
+      img: "/food/sausage.png"
+    },
+    {
+      id: 3,
+      name: "Coffee",
+      img: "/food/coffee.png"
+    },
+    {
+      id: 4,
+      name: "Potato Wedges",
+      img: "/food/fries.png"
+    },
+    {
+      id: 5,
+      name: "Fried Eggs",
+      img: "/food/eggs.png"
+    }
+  ]
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        {foods.map(food => (
+          <div>{food.name}</div>
+        ))}
       </header>
     </div>
   );
