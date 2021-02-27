@@ -63,7 +63,12 @@ function App() {
         <h1 className="title">Menu</h1>
         <div className="flex flex-wrap space-x-4">
           {foods.map(food => (
-            <FoodPanel key={food.id} food={food} addOrder={addOrder} />
+            <FoodPanel key={food.id} food={food}>
+              <button className="border rounded-sm p-1 bg-gray-300"
+                      onClick={() => addOrder(food)}>
+                Order
+              </button>
+            </FoodPanel>
           ))}
         </div>
 
