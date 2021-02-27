@@ -28,6 +28,16 @@ function App() {
       img: "/food/eggs.png"
     }
   ]
+  let orders = [
+    {
+      id: 1,
+      food: {
+        id: 5,
+        name: "Fried Eggs",
+        img: "/food/eggs.png"
+      }
+    }
+  ]
   return (
     <div className="App container">
       <div>
@@ -39,6 +49,22 @@ function App() {
               <img className="w-32 h-32" src={food.img} />
               <button className="border rounded-sm p-1 bg-gray-300">
                 Order
+              </button>
+            </div>
+          ))}
+        </div>
+
+        <h1 className="title">Orders</h1>
+        <div className="flex flex-wrap space-x-2">
+          {orders.map(order => (
+            <div key={order.id} className="flex flex-col space-y-1">
+              <span className="font-semibold">{order.food.name}</span>
+              <img className="w-24 h-24" src={order.food.img} />
+              <button className="border rounded-sm p-0 bg-gray-300">
+                Cook
+              </button>
+              <button className="border rounded-sm p-0 bg-gray-300">
+                Cancel
               </button>
             </div>
           ))}
