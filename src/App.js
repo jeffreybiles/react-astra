@@ -1,5 +1,6 @@
 import './App.css';
 import { useState } from 'react'
+import FoodPanel from './FoodPanel'
 
 function App() {
   let foods = [
@@ -62,14 +63,7 @@ function App() {
         <h1 className="title">Menu</h1>
         <div className="flex flex-wrap space-x-4">
           {foods.map(food => (
-            <div key={food.id} className="flex flex-col space-y-2">
-              <span className="text-lg font-semibold">{food.name}</span>
-              <img className="w-32 h-32" src={food.img} alt={food.name} />
-              <button className="border rounded-sm p-1 bg-gray-300"
-                      onClick={() => addOrder(food)}>
-                Order
-              </button>
-            </div>
+            <FoodPanel key={food.id} food={food} addOrder={addOrder} />
           ))}
         </div>
 
