@@ -36,7 +36,8 @@ function App() {
         id: 5,
         name: "Fried Eggs",
         img: "/food/eggs.png"
-      }
+      },
+      state: 'ordered'
     }
   ])
 
@@ -47,6 +48,12 @@ function App() {
       state: 'ordered'
     }
     setOrders([newOrder].concat(orders)) 
+  }
+
+  const updateOrder = (order, newState) => {
+    setOrders(orders.map(o => {
+      return order.id === o.id ? {...o, state: newState} : o
+    }))
   }
 
   return (
@@ -68,16 +75,30 @@ function App() {
 
         <h1 className="title">Orders</h1>
         <div className="flex flex-wrap space-x-2">
-          {orders.map(order => (
+          {orders.filter(o => o.state === 'ordered').map(order => (
             <div key={order.id} className="flex flex-col space-y-1">
               <span className="font-semibold">{order.food.name}</span>
               <img className="w-24 h-24" src={order.food.img} alt={order.food.name} />
-              <button className="border rounded-sm p-0 bg-gray-300">
+              <button className="border rounded-sm p-0 bg-gray-300"
+                      onClick={() => updateOrder(order, 'cooked')}>
                 Cook
               </button>
-              <button className="border rounded-sm p-0 bg-gray-300">
+              <button className="border rounded-sm p-0 bg-gray-300"
+                      onClick={() => updateOrder(order, 'canceled')}>
                 Cancel
               </button>
+            </div>
+          ))}
+        </div>
+
+        <h1 className="title">
+          Cooked
+        </h1>
+
+        <div className="flex flex-col">
+          {orders.filter(o => o.state === 'cooked').map(order => (
+            <div key={order.id}>
+              {order.food.name}
             </div>
           ))}
         </div>
