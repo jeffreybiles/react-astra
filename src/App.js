@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 
 function App() {
@@ -33,7 +32,7 @@ function App() {
     <div className="App">
       <header className="App-header">
         {foods.map(food => (
-          <div>{food.name}</div>
+          <div key={food.id}>{food.name}</div>
         ))}
       </header>
     </div>
