@@ -57,7 +57,7 @@ function App() {
           {foods.map(food => (
             <div key={food.id} className="flex flex-col space-y-2">
               <span className="text-lg font-semibold">{food.name}</span>
-              <img className="w-32 h-32" src={food.img} />
+              <img className="w-32 h-32" src={food.img} alt={food.name} />
               <button className="border rounded-sm p-1 bg-gray-300"
                       onClick={() => addOrder(food)}>
                 Order
@@ -71,7 +71,7 @@ function App() {
           {orders.map(order => (
             <div key={order.id} className="flex flex-col space-y-1">
               <span className="font-semibold">{order.food.name}</span>
-              <img className="w-24 h-24" src={order.food.img} />
+              <img className="w-24 h-24" src={order.food.img} alt={order.food.name} />
               <button className="border rounded-sm p-0 bg-gray-300">
                 Cook
               </button>
