@@ -30,7 +30,7 @@ function App() {
   ]
   return (
     <div className="App">
-      <header className="App-header">
+      <header className="bg-red-500">
         {foods.map(food => (
           <div key={food.id}>{food.name}</div>
         ))}
