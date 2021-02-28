@@ -42,18 +42,19 @@ function App() {
     }
   ])
 
-  const addOrder = (food) => {
+  const addOrder = function(){
     let newOrder = {
       id: Math.random(),
-      food,
+      food: this.food,
       state: 'ordered'
     }
     setOrders([newOrder].concat(orders)) 
   }
 
-  const updateOrder = (order, newState) => {
+  const updateOrder = function() {
+    let {order, state} = this;
     setOrders(orders.map(o => {
-      return order.id === o.id ? {...o, state: newState} : o
+      return order.id === o.id ? {...o, state} : o
     }))
   }
 
@@ -63,25 +64,18 @@ function App() {
         <h1 className="title">Menu</h1>
         <div className="flex flex-wrap space-x-4">
           {foods.map(food => (
-            <FoodPanel key={food.id} food={food} buttons={ [{text: 'Order', fn: addOrder }] } />
+            <FoodPanel key={food.id} food={food} buttons={ [{text: 'Order', fn: addOrder.bind({food: food}) }] } />
           ))}
         </div>
 
         <h1 className="title">Orders</h1>
         <div className="flex flex-wrap space-x-2">
           {orders.filter(o => o.state === 'ordered').map(order => (
-            <div key={order.id} className="flex flex-col space-y-1">
-              <span className="font-semibold">{order.food.name}</span>
-              <img className="w-24 h-24" src={order.food.img} alt={order.food.name} />
-              <button className="border rounded-sm p-0 bg-gray-300"
-                      onClick={() => updateOrder(order, 'cooked')}>
-                Cook
-              </button>
-              <button className="border rounded-sm p-0 bg-gray-300"
-                      onClick={() => updateOrder(order, 'canceled')}>
-                Cancel
-              </button>
-            </div>
+            <FoodPanel key={order.id}
+                       food={order.food}
+                       small={true}
+                       buttons={ [{text: 'Cook', fn: updateOrder.bind({order: order, state: 'cooked'})},
+                                  {text: 'Cancel', fn: updateOrder.bind({order: order, state: 'cancelled'}) }]} />
           ))}
         </div>
 
