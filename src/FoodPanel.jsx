@@ -8,7 +8,7 @@ export default function FoodPanel({ food, buttons, small }) {
       
       {buttons.map(btn => (
         <button className={"border rounded-sm bg-gray-300 " + (small ? 'p-0' : 'p-1')} key={btn.text}
-                onClick={() => btn.fn() }>
+                onClick={btn.fn}>
           {btn.text}
         </button>
       ))}
