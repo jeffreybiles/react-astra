@@ -64,6 +64,7 @@ function App() {
         <h1 className="title">Menu</h1>
         <div className="flex flex-wrap space-x-4">
           {foods.map(food => (
+            // I'm just playing around - function binding like this may not be the best idea
             <FoodPanel key={food.id} food={food} buttons={ [{text: 'Order', fn: addOrder.bind({food: food}) }] } />
           ))}
         </div>
