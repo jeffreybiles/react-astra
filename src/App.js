@@ -42,17 +42,16 @@ function App() {
     }
   ])
 
-  const addOrder = function(){
+  const addOrder = function(food){
     let newOrder = {
       id: Math.random(),
-      food: this.food,
+      food,
       state: 'ordered'
     }
     setOrders([newOrder].concat(orders)) 
   }
 
-  const updateOrder = function() {
-    let {order, state} = this;
+  const updateOrder = function(order, state) {
     setOrders(orders.map(o => {
       return order.id === o.id ? {...o, state} : o
     }))
@@ -64,8 +63,9 @@ function App() {
         <h1 className="title">Menu</h1>
         <div className="flex flex-wrap space-x-4">
           {foods.map(food => (
-            // I'm just playing around - function binding like this may not be the best idea
-            <FoodPanel key={food.id} food={food} buttons={ [{text: 'Order', fn: addOrder.bind({food: food}) }] } />
+            <FoodPanel key={food.id}
+                       food={food}
+                       buttons={ [{text: 'Order', fn: () => addOrder(food) }] } />
           ))}
         </div>
 
@@ -75,8 +75,8 @@ function App() {
             <FoodPanel key={order.id}
                        food={order.food}
                        small={true}
-                       buttons={ [{text: 'Cook', fn: updateOrder.bind({order: order, state: 'cooked'})},
-                                  {text: 'Cancel', fn: updateOrder.bind({order: order, state: 'cancelled'}) }]} />
+                       buttons={ [{text: 'Cook', fn: () => updateOrder(order, 'cooked') },
+                                  {text: 'Cancel', fn: () => updateOrder(order,'cancelled') } ]} />
           ))}
         </div>
 
